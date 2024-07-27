@@ -1,4 +1,5 @@
- Assignments: 1. Take two strings as input and check whether the second string is a sub-string of the first or not. If yes, print the number of times occurred in S1 and print the index positions where the string 
+ Assignments: 
+ 1. Take two strings as input and check whether the second string is a sub-string of the first or not. If yes, print the number of times occurred in S1 and print the index positions where the string 
  appeared 
  i/p : S1 = “abcdabcabd” S2 = “ab” 
  o/p: No.of times occurred = 3 Index positions = 0 4 7
