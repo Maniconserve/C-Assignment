@@ -4,29 +4,39 @@ namespace cognine.program3
     {
         public static void Main()
         {
-                NormOps normOps = new NormOps();
-                BinaryCalculator calculator = new BinaryCalculator();
-                (int integerPart1, float fractionalPart1) = normOps.ParseNumber("Enter the first number (format: integer.fraction): ");
-                (int integerPart2, float fractionalPart2) = normOps.ParseNumber("Enter the second number (format: integer.fraction): ");
+            NormOps normOps = new NormOps();
+            BinaryCalculator calculator = new BinaryCalculator();
 
+            (int firstInteger, float firstFractional) = normOps.ParseNumber("Enter the first number (format: integer.fraction): ");
+            (int secondInteger, float secondFractional) = normOps.ParseNumber("Enter the second number (format: integer.fraction): ");
 
-                string binaryIntegerPart1 = calculator.IntToBinary(integerPart1);
-                string binaryFractionalPart1 = calculator.FloatToBinary(fractionalPart1);
-                string binaryIntegerPart2 = calculator.IntToBinary(integerPart2);
-                string binaryFractionalPart2 = calculator.FloatToBinary(fractionalPart2);
+            string firstBinaryInt = calculator.IntToBinary(firstInteger);
+            string firstBinaryFrac = calculator.FloatToBinary(firstFractional);
+            string secondBinaryInt = calculator.IntToBinary(secondInteger);
+            string secondBinaryFrac = calculator.FloatToBinary(secondFractional);
 
-                string paddedBinary1 = normOps.PadBinary(binaryIntegerPart1 + binaryFractionalPart1, binaryFractionalPart1.Length);
-                string paddedBinary2 = normOps.PadBinary(binaryIntegerPart2 + binaryFractionalPart2, binaryFractionalPart2.Length);
+            int maxFractionLength = Math.Max(firstBinaryFrac.Length, secondBinaryFrac.Length);
 
-                string binarySum = calculator.AddBinary(paddedBinary1, paddedBinary2);
+            // Pad fractional parts to align them
+            string firstPaddedFrac = normOps.PadBinary(firstBinaryFrac, maxFractionLength);
+            string secondPaddedFrac = normOps.PadBinary(secondBinaryFrac, maxFractionLength);
 
-                (string sumIntegerPart, string sumFractionPart) = normOps.SplitBinarySum(binarySum, binaryFractionalPart1.Length);
+            // Combine integer and fractional parts
+            string firstCombined = firstBinaryInt + firstPaddedFrac;
+            string secondCombined = secondBinaryInt + secondPaddedFrac;
 
-                int resultIntegerPart = calculator.BinaryToInt(sumIntegerPart);
-                float resultFractionalPart = calculator.BinaryToFloat(sumFractionPart);
+            // Add binary strings
+            string binarySum = calculator.AddBinary(firstCombined,secondCombined);
 
-                
-                Console.WriteLine($"Final result: {resultIntegerPart + resultFractionalPart}");
+            // Extract integer and fractional parts from the result
+            (string sumIntegerPart, string sumFractionPart) = normOps.SplitBinarySum(binarySum, maxFractionLength);
+
+            // Convert back to integer and fractional parts
+            int integerPart = calculator.BinaryToInt(sumIntegerPart);
+            float fractionalPart = calculator.BinaryToFloat(sumFractionPart);
+
+            Console.WriteLine($"Final result: {integerPart + fractionalPart}");
         }
+
     }
 }
