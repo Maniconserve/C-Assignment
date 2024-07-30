@@ -1,18 +1,14 @@
-﻿namespace cognine.program3
+namespace cognine.program3
 {
     class Program
     {
         public static void Main()
         {
-            try
-            {
                 NormOps normOps = new NormOps();
                 BinaryCalculator calculator = new BinaryCalculator();
-                string firstNumber = normOps.GetInput("Enter the first number (format: integer.fraction): ");
-                string secondNumber = normOps.GetInput("Enter the second number (format: integer.fraction): ");
+                (int integerPart1, float fractionalPart1) = normOps.ParseNumber("Enter the first number (format: integer.fraction): ");
+                (int integerPart2, float fractionalPart2) = normOps.ParseNumber("Enter the second number (format: integer.fraction): ");
 
-                (int integerPart1, float fractionalPart1) = normOps.ParseNumber(firstNumber);
-                (int integerPart2, float fractionalPart2) = normOps.ParseNumber(secondNumber);
 
                 string binaryIntegerPart1 = calculator.IntToBinary(integerPart1);
                 string binaryFractionalPart1 = calculator.FloatToBinary(fractionalPart1);
@@ -31,12 +27,6 @@
 
                 
                 Console.WriteLine($"Final result: {resultIntegerPart + resultFractionalPart}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("An error occurred: " + ex.Message);
-            }
         }
-
     }
 }
