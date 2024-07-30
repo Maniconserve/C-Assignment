@@ -1,4 +1,4 @@
-﻿namespace cognine.program2
+namespace cognine.program2
 {
     class MaximumProduct
     {
