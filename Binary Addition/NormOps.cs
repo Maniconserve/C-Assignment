@@ -1,28 +1,24 @@
-﻿namespace cognine.program3
+namespace cognine.program3
 {
     public class NormOps
     {
-        /// <summary>
-        /// Prompts the user for input and retrieves the input string.
-        /// </summary>
-        /// <param name="prompt">The message displayed to the user.</param>
-        /// <returns>The user's input string.</returns>
-        public string GetInput(string prompt)
-        {
-            Console.Write(prompt);
-            return Console.ReadLine();
-        }
 
         /// <summary>
         /// Parses a numeric string into integer and fractional parts.
         /// </summary>
         /// <param name="number">The numeric string to parse.</param>
         /// <returns>A tuple containing the integer and fractional parts.</returns>
-        public (int, float) ParseNumber(string number)
+        public (int, float) ParseNumber(string prompt)
         {
-            var parts = number.Split(".");
-            if (parts.Length != 2) throw new Exception("Invalid input format.");
-
+            
+            String[] parts = {};
+            do
+            {
+                Console.Write(prompt);
+                String number = Console.ReadLine();
+                parts = number.Split(".");
+                if (parts.Length != 2) Console.WriteLine("Invalid input format.");
+            } while (parts.Length != 2);
             int intPart = int.Parse(parts[0]);
             float fracPart = float.Parse("0." + parts[1]);
             return (intPart, fracPart);
