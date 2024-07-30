@@ -1,4 +1,4 @@
-﻿namespace cognine.program3
+namespace cognine.program3
 {
     /// <summary>
     /// Provides methods for binary operations including conversion and addition.
@@ -52,21 +52,21 @@
         /// <summary>
         /// Adds two binary strings and returns the result as a binary string.
         /// </summary>
-        /// <param name="bin1">The first binary string.</param>
-        /// <param name="bin2">The second binary string.</param>
+        /// <param name="firstBin">The first binary string.</param>
+        /// <param name="secondBin">The second binary string.</param>
         /// <returns>The sum of the two binary strings as a binary string.</returns>
-        public string AddBinary(string bin1, string bin2)
+        public string AddBinary(string firstBin, string secondBin)
         {
             string result = "";
             int carry = 0;
-            int i = bin1.Length - 1;
-            int j = bin2.Length - 1;
+            int i = firstBin.Length - 1;
+            int j = secondBin.Length - 1;
 
             while (i >= 0 || j >= 0 || carry > 0)
             {
                 int sum = carry;
-                if (i >= 0) sum += bin1[i] - '0';
-                if (j >= 0) sum += bin2[j] - '0';
+                if (i >= 0) sum += firstBin[i] - '0';
+                if (j >= 0) sum += secondBin[j] - '0';
                 result = (sum % 2) + result;
                 carry = sum / 2;
                 i--;
