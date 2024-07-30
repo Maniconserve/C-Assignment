@@ -1,4 +1,6 @@
-﻿namespace cognine.program1
+using System;
+
+namespace cognine.program1
 {
     class Validations
     {
@@ -15,17 +17,22 @@
                 Console.Write(prompt);
                 input = Console.ReadLine();
 
-                // Check for null or empty input
-                if (string.IsNullOrEmpty(input))
+                // Check for null or empty input manually
+                if (input == null || input.Length == 0)
                 {
                     Console.WriteLine("Input cannot be empty. Please try again.");
                 }
+                // Check if input is numeric manually
                 else if (IsNumeric(input))
                 {
                     Console.WriteLine("Input should not be a number. Please try again.");
                 }
+                else
+                {
+                    break; 
+                }
 
-            } while (string.IsNullOrEmpty(input) || IsNumeric(input));
+            } while (true); // Continue until valid input is received
 
             return input;
         }
@@ -37,13 +44,21 @@
         /// <returns>True if the string is numeric; otherwise, false.</returns>
         public bool IsNumeric(string value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (value == null || value.Length == 0)
             {
                 return false;
             }
 
-            // parsing the input as a double (covers both integer and floating-point numbers).
-            return double.TryParse(value, out _);
+            // Check if all characters in the string are digits
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (value[i] < '0' || value[i] > '9')
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
