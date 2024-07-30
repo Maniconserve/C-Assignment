@@ -1,4 +1,4 @@
-﻿namespace cognine.program1
+namespace cognine.program1
 {
 
     class Program
